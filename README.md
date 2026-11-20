@@ -6,6 +6,8 @@ A Python human-in-the-loop firewall for **configured** Model Context Protocol (M
 
 > Interview project / single-user prototype. No injected browser scripts, packet sniffing, TLS interception or Claude modifications. Automated tests use real local transports but do not launch Claude. Live verification is tracked separately below. The application does not intercept unconfigured tools, built-in Claude tools, or other clients that bypass the gateway.
 
+**[Demonstration video — v1.0.0](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/tag/v1.0.0)**
+
 ## Objective and requirements
 
 AI clients can invoke external tools that read data or cause side effects. MCP Guardian inserts an explicit human authorization step at the configured MCP transport boundary, before any protected request reaches its upstream server. It is designed to satisfy the following interview requirements:
@@ -30,25 +32,30 @@ AI clients can invoke external tools that read data or cause side effects. MCP G
 |---|---|
 | Automated test suite on macOS | 12 passed (9.01s, 20 November 2026) |
 | Native macOS dialog, manual Allow | Verified; `Approved: True` |
-| Claude Desktop discovery and Allow | Observed successful tool call after Allow once; verify file content and audit record during demo |
+| Claude Desktop discovery and Allow | Verified on macOS: successful create_file call; terminal confirmed `interview.txt` contains `Hello MCP Guardian` |
 | Live Claude Desktop Block | Pending explicit Block click and file-preservation verification |
 | Local HTTP gateway and concurrency | Covered by automated tests; interactive demo instructions below |
 | Live Claude Web Allow and Block | Pending connector setup and live verification |
-| Recorded demonstration | Pending video upload and README link |
+| Recorded demonstration | Published on GitHub Releases, v1.0.0 (`mcp-guardian-demo.mov`, 8.12 MB) |
 
-Update this table after completing the remaining checks. Do not mark a live test as passing merely because an automated test passes.
+Live Desktop Block and Claude Web verification remain outstanding unless separately confirmed. Automated tests are not a substitute for live client testing.
 
 ## Demonstration video
 
-**Recording link:** Pending upload to GitHub Releases. Once published, replace this line with a link to the actual recording. See [the recording checklist](docs/DEMO.md) and the demonstration steps below.
+[View demonstration release](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/tag/v1.0.0) | [Download demonstration video (.mov)](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/download/v1.0.0/mcp-guardian-demo.mov)
 
-<!-- Example: [Download / watch the demonstration](https://github.com/YOUR_USERNAME/mcp-guardian/releases/download/v1.0.0/mcp-guardian-demo.mov) -->
+The recording is attached to release **v1.0.0** under Assets. See [the demonstration guide](docs/DEMO.md) for reproducible test steps. The recording is published; its specific test coverage has not been independently verified.
 
 ## Quick start (macOS / Windows)
 
 Requirements: Python **3.11+**, a graphical desktop (native AppleScript dialogs on macOS by default; Tkinter on Windows/Linux), and Claude Desktop for the first demo. For Claude Web additionally install [ngrok](https://ngrok.com/download) and create a free ngrok account (or use another HTTPS tunnel). A public URL alone is not enough: configure the secret header as described below.
 
-1. Extract the ZIP. Open the `mcp-guardian` directory in VS Code. Open a terminal there.
+1. Clone the repository and open the project directory in VS Code (or download the source ZIP from the release).
+
+```bash
+git clone https://github.com/AbhishekAgrahari22/mcp-guardian.git
+cd mcp-guardian
+```
 2. Create and activate a virtual environment.
 
 macOS / Linux:
@@ -272,45 +279,23 @@ Suggested sequence:
 | Concurrent requests | Run `python manual_demo.py` with HTTP services running; allow one and block the other |
 | Reliability and testing | Show a timeout or discuss fail-closed handling; run `python -m pytest -q` and show audit history |
 
-### Publish source and video on GitHub
+### Repository and release
 
-Create a new empty GitHub repository named `mcp-guardian`. Do not initialize it with a second README. Choose Public only if you are permitted to share the project; if Private, give the interviewer access. From the project directory:
+- [Source code and documentation](https://github.com/AbhishekAgrahari22/mcp-guardian)
+- [Version v1.0.0 and demonstration assets](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/tag/v1.0.0)
+- [Download the recorded demonstration](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/download/v1.0.0/mcp-guardian-demo.mov)
 
-```bash
-git init
-git add .
-git status --short
-git diff --cached --stat
-```
-
-Inspect staged files before committing. `.guardian/`, `.venv/`, `.pytest_cache/`, `__pycache__/`, tokens and personal files must not be included. Keep the recording outside the repo if uploading it as a release asset.
-
-```bash
-git commit -m "Implement MCP Guardian approval firewall"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/mcp-guardian.git
-git push -u origin main
-```
-
-Replace `YOUR_USERNAME` with your GitHub handle. If an origin exists, check `git remote -v` before changing it. Authenticate using GitHub CLI or a supported credential method. GitHub Actions runs the test suite on push and pull request.
-
-Recommended video hosting: in the repository open **Releases → Draft a new release**, create tag `v1.0.0`, attach the actual `.mov` or `.mp4` recording, and publish. Copy the asset URL into the Demonstration video section of this README and `docs/DEMO.md`. This keeps large media out of Git history. Alternatively, a small video can be committed as `docs/demo.mp4` and linked using `[Watch the demo](docs/demo.mp4)`. GitHub blocks ordinary Git files over 100 MiB. Do not rename a `.mov` file to `.mp4` without converting it.
-
-After updating the video link and verified test status:
-
-```bash
-git add README.md docs/DEMO.md
-git commit -m "Add demonstration video and live verification results"
-git push
-```
+The video is hosted as a GitHub release asset rather than committed into Git history. Generated local configuration (`.guardian/`), virtual environments, audit data and secrets must remain excluded from version control. To run the project, follow the Quick start above.
 
 ### Deliverables checklist
 
-- [ ] Complete Python code and dependencies in GitHub repository.
-- [ ] README covers installation, configuration, usage, architecture, security, limitations and testing.
-- [ ] Actual demonstration recording available on GitHub and linked from README.
-- [ ] Live Allow and Block verified with filesystem evidence on Desktop and Web.
-- [ ] Verify repository and video access as the reviewer; submit the repository URL.
+- [x] Python project uploaded to GitHub.
+- [x] README covers installation, configuration, usage, architecture, security, limitations and testing.
+- [x] Demonstration recording published on GitHub and linked from this README.
+- [x] Automated tests passed on macOS; live Desktop Allow confirmed with filesystem evidence.
+- [ ] Live Desktop Block confirmed with file-preservation evidence.
+- [ ] Live Claude Web Allow and Block confirmed.
+- [ ] Verify repository and video access as the reviewer.
 
 ## References
 
