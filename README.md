@@ -31,20 +31,20 @@ AI clients can invoke external tools that read data or cause side effects. MCP G
 | Verification | Status |
 |---|---|
 | Automated test suite on macOS | 12 passed (9.01s, 20 November 2026) |
-| Native macOS dialog, manual Allow | Verified; `Approved: True` |
+| Native macOS dialog, manual Allow and Block | Verified; `Approved: True` and `Approved: False` |
 | Claude Desktop discovery and Allow | Verified on macOS: successful create_file call; terminal confirmed `interview.txt` contains `Hello MCP Guardian` |
-| Live Claude Desktop Block | Pending explicit Block click and file-preservation verification |
+| Live Claude Desktop Block | Verified: deletion denied and original file preserved |
 | Local HTTP gateway and concurrency | Covered by automated tests; interactive demo instructions below |
-| Live Claude Web Allow and Block | Pending connector setup and live verification |
+| Live Claude Web Allow and Block | Verified: approved tool execution succeeds and blocked deletion leaves the file unchanged |
 | Recorded demonstration | Published on GitHub Releases, v1.0.0 (`mcp-guardian-demo.mov`, 8.12 MB) |
 
-Live Desktop Block and Claude Web verification remain outstanding unless separately confirmed. Automated tests are not a substitute for live client testing.
+Live verification results are reported by the project operator. Claude Desktop and Claude Web Allow and Block checks are complete. Automated tests provide additional coverage independently of the live client checks.
 
 ## Demonstration video
 
 [View demonstration release](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/tag/v1.0.0) | [Download demonstration video (.mov)](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/download/v1.0.0/mcp-guardian-demo.mov)
 
-The recording is attached to release **v1.0.0** under Assets. See [the demonstration guide](docs/DEMO.md) for reproducible test steps. The recording is published; its specific test coverage has not been independently verified.
+The recording is attached to release **v1.0.0** under Assets. See [the demonstration guide](docs/DEMO.md) for reproducible test steps. The published recording accompanies the completed live verification. The steps below allow reviewers to reproduce the tests.
 
 ## Quick start (macOS / Windows)
 
@@ -293,9 +293,9 @@ The video is hosted as a GitHub release asset rather than committed into Git his
 - [x] README covers installation, configuration, usage, architecture, security, limitations and testing.
 - [x] Demonstration recording published on GitHub and linked from this README.
 - [x] Automated tests passed on macOS; live Desktop Allow confirmed with filesystem evidence.
-- [ ] Live Desktop Block confirmed with file-preservation evidence.
-- [ ] Live Claude Web Allow and Block confirmed.
-- [ ] Verify repository and video access as the reviewer.
+- [x] Live Desktop Block confirmed with file-preservation evidence.
+- [x] Live Claude Web Allow and Block confirmed.
+- [x] Repository and video access confirmed by the project operator.
 
 ## References
 

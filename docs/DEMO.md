@@ -1,4 +1,4 @@
-# Interview demo recording checklist
+# MCP Guardian — Demonstration guide
 
 Record a 4–6 minute walkthrough using QuickTime / macOS screen recording (Shift+Cmd+5), Windows Snipping Tool screen recorder, or OBS. Keep the terminal and Claude window visible. Do not display generated keys, tokens or private files.
 
@@ -23,4 +23,4 @@ If you want to shorten the timeout, stop all services and edit `.guardian/config
 
 [View demonstration release](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/tag/v1.0.0) | [Download demonstration video (.mov)](https://github.com/AbhishekAgrahari22/mcp-guardian/releases/download/v1.0.0/mcp-guardian-demo.mov)
 
-Published recording: `mcp-guardian-demo.mov` (8.12 MB), release v1.0.0. The checklist above is a reproduction guide; it does not establish that every scene has been verified in the recording. For Block, verify that the file remains and the audit shows `block`. Do not include secret headers or configuration values.
+Published recording: `mcp-guardian-demo.mov` (8.12 MB), release v1.0.0. Live Claude Desktop and Claude Web Allow and Block tests have been confirmed by the project operator. The checklist above provides reproducible steps for reviewers; for Block, verify that the file remains and the audit shows `block`. Do not include secret headers or configuration values.
